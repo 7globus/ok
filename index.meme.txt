@@ -1,0 +1,608 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#090d12" />
+  <meta name="description" content="SUPERMEMES (SUPR) on Solana — 2026 is the new 2016. Meme reset. The museum is open." />
+
+  <meta property="og:title" content="SUPERMEMES (SUPR)" />
+  <meta property="og:description" content="A meme-reset coin on Solana. 2026 is the new 2016." />
+  <meta property="og:type" content="website" />
+
+  <title>SUPERMEMES (SUPR) — Meme Reset on Solana</title>
+
+  <style>
+    :root{
+      --bg:#090d12;
+      --panel:#0e1420;
+      --text:#eaf2ff;
+      --muted:#a9b6cc;
+      --line:rgba(255,255,255,.08);
+      --accent:#7cff6b;
+      --accent2:#7aa7ff;
+      --hot:#ff8a3d;
+      --shadow: 0 18px 50px rgba(0,0,0,.45);
+      --radius: 18px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background:
+        radial-gradient(1000px 700px at 22% -10%, rgba(124,255,107,.18), transparent 60%),
+        radial-gradient(900px 600px at 85% 8%, rgba(122,167,255,.16), transparent 55%),
+        radial-gradient(900px 700px at 50% 120%, rgba(255,138,61,.12), transparent 55%),
+        var(--bg);
+      overflow-x:hidden;
+    }
+
+    a{color:inherit}
+    .container{max-width:1120px;margin:0 auto;padding:0 20px}
+
+    /* Top bar */
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(to bottom, rgba(9,13,18,.90), rgba(9,13,18,.65));
+      border-bottom: 1px solid var(--line);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 0;
+      gap:14px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.6px;
+    }
+    .badge{
+      display:inline-flex; align-items:center; justify-content:center;
+      width:36px;height:36px;
+      border-radius:12px;
+      background: linear-gradient(135deg, rgba(124,255,107,.18), rgba(122,167,255,.14));
+      border:1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+    .brand small{display:block;font-weight:750;color:var(--muted);letter-spacing:.3px}
+
+    .navlinks{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+    .navlinks a{
+      text-decoration:none;
+      color:var(--muted);
+      font-weight:750;
+      padding:9px 10px;
+      border-radius:12px;
+      border:1px solid transparent;
+      transition: all .15s ease;
+    }
+    .navlinks a:hover{color:var(--text); border-color: var(--line); background: rgba(255,255,255,.03)}
+
+    /* Buttons */
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding:12px 14px;
+      border-radius: 14px;
+      border:1px solid var(--line);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.2px;
+      background: rgba(255,255,255,.03);
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      cursor:pointer;
+    }
+    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.14)}
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(124,255,107,.18), rgba(124,255,107,.08));
+      border-color: rgba(124,255,107,.35);
+    }
+    .btn.primary:hover{border-color: rgba(124,255,107,.55)}
+    .btn.secondary{
+      background: linear-gradient(135deg, rgba(122,167,255,.16), rgba(122,167,255,.07));
+      border-color: rgba(122,167,255,.35);
+    }
+
+    /* Cards */
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .card-inner{padding:22px}
+
+    /* Hero */
+    .hero{padding:64px 0 24px}
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.18fr .82fr;
+      gap:18px;
+      align-items:stretch;
+    }
+
+    .kicker{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      color:var(--muted);
+      background: rgba(255,255,255,.02);
+      font-weight:850;
+      letter-spacing:.2px;
+    }
+
+    h1{
+      margin:14px 0 10px;
+      font-size: clamp(34px, 4.3vw, 58px);
+      line-height: 1.03;
+      letter-spacing: -0.9px;
+    }
+    .sub{
+      font-size: 16px;
+      line-height: 1.55;
+      color: var(--muted);
+      max-width: 70ch;
+    }
+    .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+
+    .mini{
+      margin-top:16px;
+      padding:12px 12px;
+      border-radius: 14px;
+      border:1px dashed rgba(255,255,255,.16);
+      color: rgba(234,242,255,.88);
+      background: rgba(0,0,0,.18);
+      font-weight:780;
+    }
+    .mini span{color:var(--muted); font-weight:850}
+
+    /* Hero image */
+    .hero-media{
+      position:relative;
+      height:100%;
+      min-height: 320px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      background:
+        radial-gradient(520px 380px at 50% 35%, rgba(255,138,61,.18), transparent 60%),
+        radial-gradient(420px 360px at 55% 85%, rgba(122,167,255,.14), transparent 55%),
+        linear-gradient(180deg, rgba(14,20,32,.92), rgba(12,17,27,.88));
+    }
+
+    /* Consistent image styling (no file edits needed) */
+    .img{
+      width:100%;
+      height:100%;
+      max-height: 340px;
+      object-fit: cover;
+      border-radius: 16px;
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow: 0 14px 40px rgba(0,0,0,.42);
+      background: rgba(0,0,0,.18);
+      /* unified “museum glass” vibe */
+      filter: contrast(1.05) saturate(1.08);
+    }
+    .img.meme-img{max-height: 220px; object-fit: contain; background: rgba(255,255,255,.02)}
+
+    .tag{
+      position:absolute;
+      top:16px; left:16px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,138,61,.30);
+      background: rgba(255,138,61,.12);
+      color: rgba(234,242,255,.92);
+      font-weight:950;
+      letter-spacing:.3px;
+    }
+
+    /* Sections */
+    section{padding:18px 0}
+    .grid-3{display:grid;grid-template-columns: repeat(3, 1fr);gap:16px}
+    .grid-2{display:grid;grid-template-columns: repeat(2, 1fr);gap:16px}
+
+    .h2{font-size: 22px; letter-spacing: -.2px; margin:0 0 8px}
+    .p{color:var(--muted); line-height:1.6; margin:0}
+
+    .pill{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:10px 12px;
+      border-radius: 999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.02);
+      font-weight:900;
+      margin:8px 8px 0 0;
+      color: rgba(234,242,255,.9);
+    }
+    .pill i{font-style:normal; color: var(--accent)}
+
+    .list{margin:0; padding:0; list-style:none}
+    .list li{
+      display:flex; gap:10px;
+      padding:12px 0;
+      border-top: 1px solid var(--line);
+      color: rgba(234,242,255,.92);
+    }
+    .list li:first-child{border-top:none}
+    .dot{width:10px;height:10px;border-radius:999px;background: rgba(124,255,107,.75); margin-top:6px; flex:0 0 auto}
+    .muted{color:var(--muted)}
+
+    .codebox{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 12px;
+      line-height: 1.5;
+      padding:14px;
+      border-radius: 14px;
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.22);
+      overflow:auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    /* Gallery */
+    .gallery{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:14px;
+    }
+    .meme{
+      grid-column: span 6;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      padding:14px;
+    }
+    .meme h3{margin:0;font-size:16px;letter-spacing:-.2px}
+    .meme p{margin:0;color:var(--muted);line-height:1.45;font-size:13px}
+
+    .meme.wide{grid-column: span 12}
+
+    /* Footer */
+    footer{padding:28px 0 44px; border-top:1px solid var(--line); margin-top:10px}
+    .foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+    .fine{color: rgba(169,182,204,.9); font-size: 12px; line-height: 1.5; max-width: 92ch}
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .hero-grid{grid-template-columns:1fr}
+      .grid-3{grid-template-columns:1fr}
+      .grid-2{grid-template-columns:1fr}
+      .meme{grid-column: span 12}
+      .navlinks{gap:8px}
+    }
+
+    @keyframes wobble{0%,100%{transform: translateY(0)}50%{transform: translateY(-3px)}}
+    .wobble{animation:wobble 2.4s ease-in-out infinite}
+
+    @media (prefers-reduced-motion: reduce){
+      .wobble{animation:none}
+      .btn{transition:none}
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="container">
+      <div class="nav">
+        <a class="brand" href="#top" aria-label="SUPERMEMES home">
+          <span class="badge" aria-hidden="true">🔥</span>
+          <span>
+            SUPERMEMES <span style="opacity:.85">(SUPR)</span>
+            <small>meme reset • solana chain</small>
+          </span>
+        </a>
+
+        <nav class="navlinks" aria-label="Primary">
+          <a href="#about">About</a>
+          <a href="#museum">Meme Museum</a>
+          <a href="#tokenomics">Tokenomics</a>
+          <a href="#buy">How to Buy</a>
+          <a class="btn primary" href="#contract">Contract</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="card">
+            <div class="card-inner">
+              <div class="kicker wobble">🧨 2026 = 2016 • MEME RESET PROTOCOL • <b style="color:var(--accent)">SUPR</b> ON SOLANA</div>
+              <h1>SUPERMEMES<br/>is the internet remembering.</h1>
+              <p class="sub">
+                We’re generalizing the whole golden era into one coin.
+                No "utility" speeches. No corporate humor. No explanation threads.
+                Just a museum of legendary memes — and a hard reset of the timeline.
+              </p>
+
+              <div class="cta-row">
+                <a class="btn primary" href="#buy">🧃 Where to Buy</a>
+                <a class="btn secondary" href="#museum">🖼️ Enter the Meme Museum</a>
+                <a class="btn" href="#contract">📋 Contract</a>
+              </div>
+
+              <div class="mini" role="note">
+                <span>Read this carefully:</span> This is not financial advice. This is a vibe. If you’re looking for fundamentals, please seek professional help.
+              </div>
+            </div>
+          </div>
+
+          <div class="card hero-media" aria-label="Supermemes panel">
+            <div class="tag">status: THE SUN IS RISING (AGAIN)</div>
+            <img class="img" src="assets/supermemes.png" alt="Supermemes retro sunrise" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="container">
+        <div class="grid-3">
+          <div class="card"><div class="card-inner">
+            <h2 class="h2">What is SUPERMEMES?</h2>
+            <p class="p">
+              SUPERMEMES (SUPR) is a Solana meme coin dedicated to the greatest era of internet nonsense.
+              Think of it as a single ticker that says: <b>“we’re doing 2016 again.”</b>
+            </p>
+          </div></div>
+
+          <div class="card"><div class="card-inner">
+            <h2 class="h2">The mission</h2>
+            <p class="p">
+              Reset meme culture to factory settings.
+              Less polish. More chaos. Maximum nostalgia.
+              If you’ve ever typed “lmao” unironically — you already understand.
+            </p>
+          </div></div>
+
+          <div class="card"><div class="card-inner">
+            <h2 class="h2">Rules of the reset</h2>
+            <div>
+              <span class="pill"><i>✓</i> context optional</span>
+              <span class="pill"><i>✓</i> cringe rejected</span>
+              <span class="pill"><i>✓</i> vibes mandatory</span>
+              <span class="pill"><i>✓</i> memetic history preserved</span>
+            </div>
+          </div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MUSEUM -->
+    <section id="museum">
+      <div class="container">
+        <div class="card">
+          <div class="card-inner">
+            <h2 class="h2">Meme Museum (Greatest Hits)</h2>
+            <p class="p">You sent bangers. I added lore. Dat Boi is included by law.</p>
+
+            <div class="gallery" style="margin-top:16px">
+              <article class="card meme wide">
+                <img class="img meme-img" src="assets/datboi.jpg" alt="Here come dat boi frog on a unicycle" />
+                <div>
+                  <h3>Here Come Dat Boi</h3>
+                  <p>Oh shit waddup. The frog is the patron saint of the reset. If you see him, it’s already too late.</p>
+                </div>
+              </article>
+
+              <article class="card meme">
+                <img class="img meme-img" src="assets/mrkrabs_confused.png" alt="Confused Mr. Krabs meme" />
+                <div>
+                  <h3>Confused Mr. Krabs</h3>
+                  <p>Average market candle. Average group chat. Average person realizing it’s 2026 but feels like 2016.</p>
+                </div>
+              </article>
+
+              <article class="card meme">
+                <img class="img meme-img" src="assets/arthur_fist.png" alt="Arthur clenched fist meme" />
+                <div>
+                  <h3>Arthur Fist</h3>
+                  <p>When someone asks “what’s the utility?” and you remember the utility is being annoying online.</p>
+                </div>
+              </article>
+
+              <article class="card meme">
+                <img class="img meme-img" src="assets/pop_quiz.png" alt="Alright everyone pop quiz meme" />
+                <div>
+                  <h3>Alright Everyone Pop Quiz</h3>
+                  <p>Question 1: who up resetting they memes? Question 2: name 3 legendary formats without googling.</p>
+                </div>
+              </article>
+
+              <article class="card meme">
+                <img class="img meme-img" src="assets/mocking_spongebob.png" alt="Mocking SpongeBob meme" />
+                <div>
+                  <h3>Mocking SpongeBob</h3>
+                  <p>“yOu nEeD a rOaDmAp” — ok buddy anyway here’s a frog on a unicycle.</p>
+                </div>
+              </article>
+
+              <article class="card meme wide">
+                <img class="img meme-img" src="assets/supermemes.png" alt="Supermemes retro sunrise" />
+                <div>
+                  <h3>SUPERMEMES Title Card</h3>
+                  <p>The sun rises. The timeline loops. The museum opens. The memes breathe again.</p>
+                </div>
+              </article>
+            </div>
+
+            <div class="mini" style="margin-top:16px">
+              <span>Honorable mentions (text-only):</span>
+              Doge • Pepe • Distracted Boyfriend • Harambe • “This Is Fine” • Drake Hotline Bling • Rickroll • Nyan Cat • Success Kid • Bad Luck Brian
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TOKENOMICS -->
+    <section id="tokenomics">
+      <div class="container">
+        <div class="grid-2">
+          <div class="card"><div class="card-inner">
+            <h2 class="h2">Tokenomics (high science)</h2>
+            <p class="p">Solana chain. Low fees. High meme density.</p>
+
+            <ul class="list" style="margin-top:10px">
+              <li><span class="dot"></span><div><b>Chain:</b> Solana</div></li>
+              <li><span class="dot"></span><div><b>Ticker:</b> SUPR</div></li>
+              <li><span class="dot"></span><div><b>Total supply:</b> 1,000,000,000 SUPR <span class="muted">(a nice round number because we are not doing calculus)</span></div></li>
+              <li><span class="dot"></span><div><b>Taxes:</b> none <span class="muted">(the IRS can’t tax nostalgia)</span></div></li>
+            </ul>
+          </div></div>
+
+          <div class="card" id="contract"><div class="card-inner">
+            <h2 class="h2">Contract</h2>
+            <p class="p">Paste your real Solana mint address here when ready.</p>
+
+            <div class="codebox" id="contractBox">Solana Mint Address: YOUR_SOL_MINT_ADDRESS_HERE</div>
+
+            <div class="cta-row" style="margin-top:12px">
+              <button class="btn" type="button" onclick="copyMint()">📋 Copy mint</button>
+              <a class="btn primary" href="#buy">🧃 Buy guide</a>
+            </div>
+          </div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BUY -->
+    <section id="buy">
+      <div class="container">
+        <div class="grid-2">
+          <div class="card"><div class="card-inner">
+            <h2 class="h2">How to buy (Solana)</h2>
+            <p class="p">Replace placeholder links with your real Jupiter/Raydium links later.</p>
+
+            <ul class="list" style="margin-top:10px">
+              <li><span class="dot"></span><div><b>1.</b> Get a Solana wallet (Phantom, Solflare, etc.)</div></li>
+              <li><span class="dot"></span><div><b>2.</b> Add SOL for gas</div></li>
+              <li><span class="dot"></span><div><b>3.</b> Paste the SUPR mint address</div></li>
+              <li><span class="dot"></span><div><b>4.</b> Swap, then immediately post a cursed image to honor the ancestors</div></li>
+            </ul>
+
+            <div class="cta-row" style="margin-top:14px">
+              <a class="btn primary" href="#" rel="noopener" target="_blank">🪐 Buy on Jupiter (placeholder)</a>
+              <a class="btn" href="#" rel="noopener" target="_blank">📈 Chart (placeholder)</a>
+              <a class="btn" href="#" rel="noopener" target="_blank">🔎 Solscan (placeholder)</a>
+            </div>
+          </div></div>
+
+          <div class="card"><div class="card-inner">
+            <h2 class="h2">Community</h2>
+            <p class="p">
+              No Discord. No X. No Telegram.
+              <b>We are the community here right now.</b>
+              If you’re reading this, congratulations: you are already in the museum.
+            </p>
+
+            <div class="mini" style="margin-top:14px">
+              Group chat location: <b>this website</b>.<br/>
+              Time: <b>now</b>.<br/>
+              Mood: <b>2016</b>.
+            </div>
+
+            <div class="cta-row" style="margin-top:14px">
+              <button class="btn" type="button" onclick="toast('you are now officially a curator 🫡')">🖼️ Become a Curator</button>
+              <button class="btn secondary" type="button" onclick="toast('meme reset confirmed ✅')">🔁 Confirm the Reset</button>
+            </div>
+          </div></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="foot">
+        <div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <span class="badge" aria-hidden="true">🖼️</span>
+            <div>
+              <div style="font-weight:950;letter-spacing:.4px">SUPERMEMES (SUPR)</div>
+              <div class="muted" style="font-weight:800">meme reset • solana chain • the museum stays open</div>
+            </div>
+          </div>
+        </div>
+        <div class="fine">
+          <b>Disclaimer:</b> SUPERMEMES is a meme coin for entertainment. Nothing here is financial advice.
+          Do not invest money you can’t afford to turn into a screenshot.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scroll for in-page links (respect reduced motion)
+    (function () {
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', (e) => {
+          const id = a.getAttribute('href');
+          if (!id || id === '#') return;
+          const el = document.querySelector(id);
+          if (!el) return;
+          e.preventDefault();
+          el.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block: 'start' });
+          history.pushState(null, '', id);
+        });
+      });
+    })();
+
+    // Copy Solana mint placeholder
+    function copyMint() {
+      const placeholder = 'YOUR_SOL_MINT_ADDRESS_HERE';
+      navigator.clipboard?.writeText(placeholder).then(() => {
+        toast('Mint copied (placeholder). Replace it with the real one, curator.');
+      }).catch(() => {
+        toast('Clipboard blocked. Manually copy: ' + placeholder);
+      });
+    }
+
+    // Tiny toast
+    let toastTimer;
+    function toast(msg){
+      clearTimeout(toastTimer);
+      let t = document.getElementById('toast');
+      if(!t){
+        t = document.createElement('div');
+        t.id = 'toast';
+        t.style.position='fixed';
+        t.style.left='50%';
+        t.style.bottom='18px';
+        t.style.transform='translateX(-50%)';
+        t.style.padding='12px 14px';
+        t.style.border='1px solid rgba(255,255,255,.14)';
+        t.style.borderRadius='14px';
+        t.style.background='rgba(14,20,32,.88)';
+        t.style.backdropFilter='blur(10px)';
+        t.style.color='rgba(234,242,255,.95)';
+        t.style.fontWeight='900';
+        t.style.letterSpacing='.2px';
+        t.style.boxShadow='0 18px 50px rgba(0,0,0,.45)';
+        t.style.zIndex='999';
+        document.body.appendChild(t);
+      }
+      t.textContent = msg;
+      t.style.opacity='1';
+      toastTimer = setTimeout(() => { t.style.opacity='0'; }, 2600);
+    }
+  </script>
+</body>
+</html>
